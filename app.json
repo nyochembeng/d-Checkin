@@ -9,7 +9,8 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.d-checkin.app"
     },
     "android": {
       "adaptiveIcon": {
@@ -20,7 +21,11 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.png",
+      "themeColor": "#ffffff",
+      "backgroundColor": "#ffffff",
+      "display": "standalone",
+      "shortName": "d-Checkin"
     },
     "plugins": [
       "expo-router",
@@ -33,7 +38,8 @@
           "backgroundColor": "#ffffff"
         }
       ],
-      "react-native-vision-camera"
+      "react-native-vision-camera",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
