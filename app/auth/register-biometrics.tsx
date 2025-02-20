@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { Button } from "react-native-paper";
-import { Text } from "@/components/ui/Text";
+import { Text } from "@/components/utils/Text";
 import { router } from "expo-router";
 import { Theme } from "@/lib/constants/Theme";
 
@@ -17,7 +17,7 @@ export default function RegisterBiometrics() {
   const handleProceed = () => {
     if (selectedMethod) {
       console.log(`Selected Biometric Method: ${selectedMethod}`);
-      router.navigate("/auth/biometric-registration");
+      router.navigate("/auth/biometric-authentication");
     }
   };
 

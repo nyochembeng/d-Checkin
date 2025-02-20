@@ -45,6 +45,13 @@
         {
           "faceIDPermission": "Allow d-Chechin to use Face ID."
         }
+      ],
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "Allow d-Checkin to access your calendar.",
+          "remindersPermission": "Allow d-Checkin to access your reminders."
+        }
       ]
     ],
     "experiments": {

@@ -9,17 +9,19 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: theme.colors.primary,
         tabBarInactiveTintColor: theme.colors.mutedForeground,
-        tabBarStyle: { backgroundColor: theme.colors.cards },
-        headerTitleAlign: "center",
-        headerTintColor: theme.colors.primary,
-        headerStyle: { backgroundColor: theme.colors.cards },
+        tabBarStyle: {
+          backgroundColor: theme.colors.cards,
+          height: 60,
+        },
+        tabBarShowLabel: false,
+        headerShown: false,tabBarActiveBackgroundColor: theme.colors.background,
       }}
     >
       <Tabs.Screen
         name="sessions"
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialIcons size={28} name="calendar-month" color={color} />
+            <MaterialIcons size={32} name="calendar-month" color={color} />
           ),
         }}
       />
@@ -27,7 +29,7 @@ export default function TabLayout() {
         name="(home)"
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialIcons size={28} name="home" color={color} />
+            <MaterialIcons size={32} name="home" color={color} />
           ),
         }}
       />
@@ -35,7 +37,7 @@ export default function TabLayout() {
         name="overview"
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialIcons size={28} name="history" color={color} />
+            <MaterialIcons size={32} name="history" color={color} />
           ),
         }}
       />
@@ -43,7 +45,7 @@ export default function TabLayout() {
         name="(more)"
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialIcons size={28} name="more-horiz" color={color} />
+            <MaterialIcons size={32} name="more-horiz" color={color} />
           ),
         }}
       />

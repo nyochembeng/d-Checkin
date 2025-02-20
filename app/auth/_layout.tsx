@@ -6,8 +6,9 @@ export default function AuthLayout() {
       <Stack.Screen name="login" />
       <Stack.Screen name="register" />
       <Stack.Screen name="register-biometrics" />
-      <Stack.Screen name="biometric-registration" />
-      <Stack.Screen name="registration-successful" />
+      <Stack.Screen name="biometric-authentication" />
+      <Stack.Screen name="authentication-successful" />
+      <Stack.Screen name="check-in-out" />
     </Stack>
   );
 }

@@ -4,7 +4,7 @@ import LottieView from "lottie-react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "@/lib/hooks/useTheme";
-import { Text as RNText } from "@/components/ui/Text";
+import { Text as RNText } from "@/components/utils/Text";
 
 const fingerprintInProgress = require("@/assets/lottie/fingerprint_in_progress.json");
 const fingerprintComplete = require("@/assets/lottie/fingerprint_complete.json");
@@ -54,7 +54,7 @@ export default function BiometricRegistration() {
   useEffect(() => {
     if (isComplete) {
       const timer = setTimeout(() => {
-        router.replace("/auth/registration-successful");
+        router.replace("/auth/authentication-successful");
       }, 2000);
       return () => clearTimeout(timer);
     }
@@ -74,7 +74,7 @@ export default function BiometricRegistration() {
       {/* Header with back arrow */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={24} color={theme.colors.primary} />
+          <Ionicons name="arrow-back" size={24} />
         </TouchableOpacity>
       </View>
 

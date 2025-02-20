@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { TextInput, Button, HelperText, RadioButton } from "react-native-paper";
 import { useForm, Controller } from "react-hook-form";
-import { Text } from "@/components/ui/Text";
+import { Text } from "@/components/utils/Text";
 import { useTheme } from "@/lib/hooks/useTheme";
 import { router } from "expo-router";
 

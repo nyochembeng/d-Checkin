@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import { useForm, Controller } from "react-hook-form";
-import { Text } from "@/components/ui/Text";
+import { Text } from "@/components/utils/Text";
 import { router } from "expo-router";
 import { useTheme } from "@/lib/hooks/useTheme";
 

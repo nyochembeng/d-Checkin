@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
-import { Text } from "@/components/ui/Text";
+import { Text } from "@/components/utils/Text";
 import { router } from "expo-router";
 import { useTheme } from "@/lib/hooks/useTheme";
 import LottieView from "lottie-react-native";
