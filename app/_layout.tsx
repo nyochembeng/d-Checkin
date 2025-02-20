@@ -14,7 +14,6 @@ import {
   Poppins_600SemiBold,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
-import { StatusBar } from "expo-status-bar";
 import { ThemeProvider } from "@/lib/contexts/themeContext";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -43,8 +42,10 @@ export default function RootLayout() {
   return (
     <StoreProvider store={store}>
       <ThemeProvider>
-        <Stack />
-        <StatusBar style="auto" />
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="auth" />
+        </Stack>
       </ThemeProvider>
     </StoreProvider>
   );

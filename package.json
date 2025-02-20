@@ -62,7 +62,9 @@
     "react-native-vision-camera": "^4.6.3",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
-    "react-redux": "^9.2.0"
+    "react-redux": "^9.2.0",
+    "expo-local-authentication": "~15.0.2",
+    "expo-face-detector": "~13.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
