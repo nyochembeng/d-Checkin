@@ -232,8 +232,6 @@ export default function CalendarPage() {
             )}
           />
         </View>
-
-        {/* You can add additional buttons or actions here if needed */}
       </View>
     </ScrollView>
   );

@@ -7,14 +7,12 @@ import { Header } from "@/components/utils/Header";
 
 export default function MorePage() {
   const theme = useTheme();
-
-  // Define a list of menu items with labels and target routes
   const menuItems = [
     { title: "Permissions", route: "/permissions" },
     { title: "Notifications", route: "/notifications" },
     { title: "Settings", route: "/settings" },
     { title: "Report an Issue", route: "/report-issue" },
-    { title: "Help", route: "/help" },
+    { title: "About", route: "/about" },
   ];
 
   const handleLogout = () => {
@@ -25,7 +23,9 @@ export default function MorePage() {
 
   return (
     <ScrollView style={[styles.container]}>
+      {/* Header */}
       <Header title="More" showBack showNotification />
+
       {/* Render menu items */}
       {menuItems.map((item, index) => (
         <List.Item
@@ -36,7 +36,7 @@ export default function MorePage() {
             <List.Icon
               {...props}
               icon="chevron-right"
-              color={theme.colors.primary}
+              color={theme.colors.mutedForeground}
             />
           )}
           onPress={() => router.push(item.route as any)}
@@ -46,9 +46,10 @@ export default function MorePage() {
 
       {/* Log Out Button */}
       <Button
-        mode="contained"
+        mode="outlined"
         onPress={handleLogout}
-        style={[styles.logoutButton, { backgroundColor: theme.colors.primary }]}
+        style={[styles.logoutButton, { borderColor: theme.colors.primary }]}
+        color={theme.colors.primary}
       >
         Log Out
       </Button>
@@ -63,6 +64,7 @@ const styles = StyleSheet.create({
   listItem: {
     borderBottomWidth: 0.5,
     borderBottomColor: "#ccc",
+    marginVertical: 5,
   },
   logoutButton: {
     marginTop: 20,

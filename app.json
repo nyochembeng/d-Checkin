@@ -52,6 +52,12 @@
           "calendarPermission": "Allow d-Checkin to access your calendar.",
           "remindersPermission": "Allow d-Checkin to access your reminders."
         }
+      ],
+      [
+        "expo-document-picker",
+        {
+          "iCloudContainerEnvironment": "Production"
+        }
       ]
     ],
     "experiments": {

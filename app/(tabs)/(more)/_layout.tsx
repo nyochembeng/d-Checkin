@@ -7,6 +7,8 @@ export default function MoreLayout() {
       <Stack.Screen name="notifications" />
       <Stack.Screen name="permissions" />
       <Stack.Screen name="settings" />
+      <Stack.Screen name="apply-permission" />
+      <Stack.Screen name="about" />
     </Stack>
   );
 }

@@ -1,12 +1,15 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { Header } from '@/components/utils/Header'
+import { View } from "react-native";
+import React from "react";
+import { Header } from "@/components/utils/Header";
+import EmployeePage from "@/components/pages/Employee";
+import StudentPage from "@/components/pages/Student";
 
 export default function Home() {
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <Header title="Home" showNotification showBack />
-      <Text>Home</Text>
+      {/* <EmployeePage /> */}
+      <StudentPage />
     </View>
-  )
+  );
 }

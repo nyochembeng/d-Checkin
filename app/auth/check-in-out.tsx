@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { View, StyleSheet, Alert, TouchableOpacity } from "react-native";
 import { Button } from "react-native-paper";
 import { Text } from "@/components/utils/Text";
@@ -6,6 +6,7 @@ import { router } from "expo-router";
 import { useTheme } from "@/lib/hooks/useTheme";
 import { MaterialIcons } from "@expo/vector-icons";
 
+// Sample tips
 const tips = [
   "Do you know? Our biometric system can speed up your check-ins by up to 50%.",
   "Do you know? Checking out before leaving helps maintain accurate work hours records.",
@@ -14,11 +15,19 @@ const tips = [
   "Do you know? You can view your complete work hours history on your dashboard anytime.",
 ];
 
+// For demonstration: change this to "employee" or "student"
+const userRole: "employee" | "student" = "student";
+
+// Sample course details (for students)
+const courseDetails = {
+  courseTitle: "Advanced Mathematics",
+  period: "09:00 AM - 11:00 AM",
+  checkInDeadline: "08:50 AM",
+  status: "On Time", // or "Late"
+};
+
 export default function CheckInOut() {
   const theme = useTheme();
-
-  // Simulated employee status (true means checked in, false means not)
-  // In a real app, this should be fetched from your backend or Redux store
   const [isCheckedIn, setIsCheckedIn] = useState<boolean>(false);
   const [currentTip, setCurrentTip] = useState<string>("");
 
@@ -37,34 +46,14 @@ export default function CheckInOut() {
   // Handler for check-in/out button
   const handleAction = () => {
     if (isCheckedIn) {
-      // Case: Employee wants to check out.
-      Alert.alert("Confirm Checkout", "Are you sure you want to check out?", [
-        { text: "Cancel", style: "cancel" },
-        {
-          text: "Yes",
-          onPress: () => {
-            // Navigate to biometric authentication page for checkout.
-            // router.push("/biometric-authentication?action=checkout");
-          },
-        },
-      ]);
+      // Employee: checkout; Student: simply navigate (if applicable)
+      // router.push("/biometric-authentication?action=checkout");
     } else {
-      // Case: Employee wants to check in.
-      Alert.alert("Confirm Check-In", "Do you want to check in now?", [
-        { text: "Cancel", style: "cancel" },
-        {
-          text: "Yes",
-          onPress: () => {
-            // Navigate to biometric authentication page for checkin.
-            // router.push("/biometric-authentication?action=checkin");
-          },
-        },
-      ]);
+      // router.push("/biometric-authentication?action=checkin");
     }
   };
 
-  // Handler for edge cases (e.g., employee forgot to check in/out)
-  // You could add additional buttons or options to resolve these scenarios.
+  // Handler for edge cases (only for employees)
   const handleEdgeCase = () => {
     Alert.alert(
       "Edge Case Detected",
@@ -76,7 +65,7 @@ export default function CheckInOut() {
         {
           text: "Proceed",
           onPress: () => {
-            // router.push(`"/biometric-authentication?edgeCase=true`);
+            // router.push("/biometric-authentication?edgeCase=true");
           },
         },
       ]
@@ -87,10 +76,19 @@ export default function CheckInOut() {
     <View
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
-      {/* Header with back arrow */}
+      {/* Header with close icon */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()}>
-          <MaterialIcons name="close" size={24} />
+        <View style={styles.headerLeft} />
+        <View style={styles.headerCenter}/>
+        <TouchableOpacity
+          style={styles.headerRight}
+          onPress={() => router.back()}
+        >
+          <MaterialIcons
+            name="close"
+            size={24}
+            color={theme.colors.foreground}
+          />
         </TouchableOpacity>
       </View>
 
@@ -101,11 +99,35 @@ export default function CheckInOut() {
         {isCheckedIn ? "You haven't checked out" : "You are not checked in"}
       </Text>
 
-      {/* Tips */}
+      {/* Tip Message */}
       <Text style={[styles.tip, { color: theme.colors.foreground }]}>
         {currentTip}
       </Text>
 
+      {/* For students: display course details below tips */}
+      {userRole === "student" && (
+        <View
+          style={[
+            styles.courseContainer,
+            { borderColor: theme.colors.primary },
+          ]}
+        >
+          <Text variant="titleMedium" style={{ color: theme.colors.primary }}>
+            {courseDetails.courseTitle}
+          </Text>
+          <Text variant="bodySmall" style={{ color: theme.colors.foreground }}>
+            Period: {courseDetails.period}
+          </Text>
+          <Text variant="bodySmall" style={{ color: theme.colors.foreground }}>
+            Check-in Deadline: {courseDetails.checkInDeadline}
+          </Text>
+          <Text variant="bodySmall" style={{ color: theme.colors.foreground }}>
+            Status: {courseDetails.status}
+          </Text>
+        </View>
+      )}
+
+      {/* Check-In/Out Button */}
       <Button
         mode="contained"
         onPress={handleAction}
@@ -114,14 +136,16 @@ export default function CheckInOut() {
         {isCheckedIn ? "Check Out" : "Check In"}
       </Button>
 
-      {/* Optional button for handling edge cases */}
-      <Button
-        mode="outlined"
-        onPress={handleEdgeCase}
-        style={styles.edgeCaseButton}
-      >
-        Handle Edge Case
-      </Button>
+      {/* For employees: display the edge case button */}
+      {userRole === "employee" && (
+        <Button
+          mode="outlined"
+          onPress={handleEdgeCase}
+          style={styles.edgeCaseButton}
+        >
+          Handle Edge Case
+        </Button>
+      )}
     </View>
   );
 }
@@ -135,7 +159,20 @@ const styles = StyleSheet.create({
   },
   header: {
     width: "100%",
-    marginBottom: 200,
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 150,
+  },
+  headerLeft: {
+    flex: 1,
+  },
+  headerCenter: {
+    flex: 4,
+    alignItems: "center",
+  },
+  headerRight: {
+    flex: 1,
+    alignItems: "flex-end",
   },
   title: {
     marginBottom: 20,
@@ -145,6 +182,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 30,
     textAlign: "center",
+  },
+  courseContainer: {
+    width: "90%",
+    padding: 12,
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 20,
   },
   actionButton: {
     width: "80%",
