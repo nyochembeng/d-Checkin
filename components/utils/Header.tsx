@@ -9,12 +9,14 @@ type HeaderProps = {
   title: string;
   showBack?: boolean;
   showNotification?: boolean;
+  rightContent?: any;
 };
 
 export const Header: React.FC<HeaderProps> = ({
   title,
   showBack = false,
   showNotification = false,
+  rightContent,
 }) => {
   const theme = useTheme();
 

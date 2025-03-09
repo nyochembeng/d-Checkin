@@ -1,7 +1,7 @@
 import { Platform } from "react-native";
 import type { MD3Type } from "react-native-paper/lib/typescript/types";
 
-const fontConfig: Record<string, MD3Type> = {
+const FontConfig: Record<string, MD3Type> = {
   customVariant: {
     fontFamily: Platform.select({
       web: "Inter, sans-serif",
@@ -88,4 +88,4 @@ const fontConfig: Record<string, MD3Type> = {
   },
 };
 
-export default fontConfig;
+export default FontConfig;

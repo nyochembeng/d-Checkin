@@ -12,7 +12,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Link href="/home">Go to Home.</Link>
+      <Link href="/dashboard">Go to Home.</Link>
     </View>
   );
 }

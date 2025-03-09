@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 import { useColorScheme } from "@/lib/hooks/useColorScheme";
-import { Theme } from "../constants/Theme";
+import { getTheme } from "../constants/Theme";
 import { colors } from "../constants/Colors";
 import {
   MD3LightTheme,
@@ -8,40 +8,25 @@ import {
   configureFonts,
 } from "react-native-paper";
 import { PaperProvider } from "react-native-paper";
-import fontConfig from "../constants/fontConfig";
+import FontConfig from "../constants/FontConfig";
 
-export const ThemeContext = createContext(Theme);
+export const ThemeContext = createContext(getTheme());
 
-const lightPaperTheme = {
-  ...MD3LightTheme,
+const createPaperTheme = (colorScheme: "light" | "dark") => ({
+  ...(colorScheme === "dark" ? MD3DarkTheme : MD3LightTheme),
   colors: {
-    ...MD3LightTheme.colors,
-    primary: colors.light.primary,
-    background: colors.light.background,
-    text: colors.light.foreground,
+    ...(colorScheme === "dark" ? MD3DarkTheme.colors : MD3LightTheme.colors),
+    primary: colors[colorScheme].primary,
+    background: colors[colorScheme].background,
+    text: colors[colorScheme].foreground,
   },
-  fonts: configureFonts({ config: fontConfig }),
-};
-
-const darkPaperTheme = {
-  ...MD3DarkTheme,
-  colors: {
-    ...MD3DarkTheme.colors,
-    primary: colors.dark.primary,
-    background: colors.dark.background,
-    text: colors.dark.foreground,
-  },
-  fonts: configureFonts({ config: fontConfig }),
-};
+  fonts: configureFonts({ config: FontConfig }),
+});
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const colorScheme = useColorScheme();
-
-  const appTheme = {
-    ...Theme,
-  };
-
-  const paperTheme = colorScheme === "dark" ? darkPaperTheme : lightPaperTheme;
+  const colorScheme = useColorScheme() as "light" | "dark";
+  const appTheme = getTheme();
+  const paperTheme = createPaperTheme(colorScheme);
 
   return (
     <ThemeContext.Provider value={appTheme}>

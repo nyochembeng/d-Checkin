@@ -58,6 +58,12 @@
         {
           "iCloudContainerEnvironment": "Production"
         }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow d-Checkin to access your photos"
+        }
       ]
     ],
     "experiments": {

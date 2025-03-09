@@ -1,18 +1,44 @@
 import React from "react";
-import { StyleSheet, ScrollView } from "react-native";
-import { List, Button } from "react-native-paper";
+import { StyleSheet, ScrollView, View } from "react-native";
+import { List, Button, Divider, Text } from "react-native-paper";
 import { router } from "expo-router";
 import { useTheme } from "@/lib/hooks/useTheme";
 import { Header } from "@/components/utils/Header";
 
 export default function MorePage() {
   const theme = useTheme();
+
   const menuItems = [
-    { title: "Permissions", route: "/permissions" },
-    { title: "Notifications", route: "/notifications" },
-    { title: "Settings", route: "/settings" },
-    { title: "Report an Issue", route: "/report-issue" },
-    { title: "About", route: "/about" },
+    {
+      title: "Permissions",
+      route: "/permissions",
+      icon: "calendar-check-outline",
+      description: "View and manage leave requests",
+    },
+    {
+      title: "Notifications",
+      route: "/notifications",
+      icon: "bell-outline",
+      description: "Check your alerts and messages",
+    },
+    {
+      title: "Settings",
+      route: "/settings",
+      icon: "cog-outline",
+      description: "Configure app preferences",
+    },
+    {
+      title: "Report an Issue",
+      route: "/report-issue",
+      icon: "alert-circle-outline",
+      description: "Submit app problems or feedback",
+    },
+    {
+      title: "About",
+      route: "/about",
+      icon: "information-outline",
+      description: "Learn more about this application",
+    },
   ];
 
   const handleLogout = () => {
@@ -22,38 +48,74 @@ export default function MorePage() {
   };
 
   return (
-    <ScrollView style={[styles.container]}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       {/* Header */}
       <Header title="More" showBack showNotification />
 
-      {/* Render menu items */}
-      {menuItems.map((item, index) => (
-        <List.Item
-          key={index}
-          title={item.title}
-          titleStyle={{ color: theme.colors.foreground }}
-          left={(props) => (
-            <List.Icon
-              {...props}
-              icon="chevron-right"
-              color={theme.colors.mutedForeground}
-            />
-          )}
-          onPress={() => router.push(item.route as any)}
-          style={styles.listItem}
-        />
-      ))}
+      <ScrollView style={styles.scrollContainer}>
+        {/* Section Title */}
+        <Text style={[styles.sectionTitle, { color: theme.colors.primary }]}>
+          More Options
+        </Text>
 
-      {/* Log Out Button */}
-      <Button
-        mode="outlined"
-        onPress={handleLogout}
-        style={[styles.logoutButton, { borderColor: theme.colors.primary }]}
-        color={theme.colors.primary}
-      >
-        Log Out
-      </Button>
-    </ScrollView>
+        <View style={[styles.card, { backgroundColor: theme.colors.cards }]}>
+          {/* Render menu items */}
+          {menuItems.map((item, index) => (
+            <React.Fragment key={index}>
+              <List.Item
+                title={item.title}
+                description={item.description}
+                titleStyle={{
+                  color: theme.colors.foreground,
+                  fontWeight: "500",
+                }}
+                descriptionStyle={{ color: theme.colors.mutedForeground }}
+                left={(props) => (
+                  <List.Icon
+                    {...props}
+                    icon={item.icon}
+                    color={theme.colors.primary}
+                  />
+                )}
+                right={(props) => (
+                  <List.Icon
+                    {...props}
+                    icon="chevron-right"
+                    color={theme.colors.mutedForeground}
+                  />
+                )}
+                onPress={() => router.push(item.route as any)}
+                style={styles.listItem}
+              />
+              {index < menuItems.length - 1 && (
+                <Divider style={{ marginLeft: 54 }} />
+              )}
+            </React.Fragment>
+          ))}
+        </View>
+
+        {/* Log Out Button */}
+        <Button
+          mode="contained"
+          onPress={handleLogout}
+          style={[styles.logoutButton, { backgroundColor: theme.colors.warning }]}
+          labelStyle={{ color: "white", fontSize: 16 }}
+          icon="logout"
+        >
+          Log Out
+        </Button>
+
+        <View style={styles.versionContainer}>
+          <Text
+            style={{ color: theme.colors.mutedForeground, textAlign: "center" }}
+          >
+            Version 1.0.0
+          </Text>
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -61,13 +123,38 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  scrollContainer: {
+    flex: 1,
+    paddingHorizontal: 16,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginTop: 16,
+    marginBottom: 8,
+    paddingLeft: 8,
+  },
+  card: {
+    borderRadius: 12,
+    overflow: "hidden",
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+  },
   listItem: {
-    borderBottomWidth: 0.5,
-    borderBottomColor: "#ccc",
-    marginVertical: 5,
+    paddingVertical: 12,
   },
   logoutButton: {
-    marginTop: 20,
-    marginHorizontal: 20,
+    marginTop: 24,
+    marginBottom: 12,
+    borderRadius: 8,
+    paddingVertical: 6,
+  },
+  versionContainer: {
+    marginTop: 24,
+    marginBottom: 40,
+    alignItems: "center",
   },
 });

@@ -7,9 +7,9 @@ import StudentPage from "@/components/pages/Student";
 export default function Home() {
   return (
     <View style={{ flex: 1 }}>
-      <Header title="Home" showNotification showBack />
-      {/* <EmployeePage /> */}
-      <StudentPage />
+      {/* <Header title="Home" showNotification showBack /> */}
+      <EmployeePage />
+      {/* <StudentPage /> */}
     </View>
   );
 }
